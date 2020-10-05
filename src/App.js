@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LoginForm from './components/LoginForm'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import LandingPage from './components/LandingPage';
+import Navbar from './components/Navbar';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import UserInfo from './components/UserInfo';
+import background from './Styles/Back.jpg'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{backgroundImage:`url(${background})` , minHeight:'100vh' , backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+      <Router>
+       <Navbar/>
+        <Switch>
+        <Route path='/' exact component={LandingPage} />
+          <Route path='/login' component={LoginForm} />
+          <ProtectedRoutes path='/user' component={UserInfo} />
+        </Switch>
+      </Router>
     </div>
   );
 }
